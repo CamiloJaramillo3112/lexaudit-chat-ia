@@ -1,0 +1,450 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="description" content="LEXAUDIT - Asistente de orientación jurídica general">
+    <title>LEXAUDIT | Asistente Jurídico</title>
+
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=DM+Sans:wght@400;500;600;700&family=Manrope:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="styles.css">
+</head>
+
+<body>
+<main class="app-container">
+
+    <!-- Cabecera e identidad visual -->
+    <header class="chat-header">
+        <div class="bot-identity">
+            <img src="assets/lexaudit-logo.png" alt="Logo de LEXAUDIT" class="brand-logo">
+            <div class="bot-information">
+                <h1>LEXAUDIT</h1>
+                <p>Asistente jurídico inteligente</p>
+            </div>
+        </div>
+
+        <div class="header-status">
+            <span class="status-dot" aria-hidden="true"></span>
+            <span>Prototipo disponible</span>
+        </div>
+    </header>
+
+    <!-- Aviso siempre visible -->
+    <aside class="legal-notice">
+        <span class="notice-icon" aria-hidden="true">ⓘ</span>
+        <p>Asistente de orientación jurídica general; no emite conceptos legales vinculantes ni reemplaza a un abogado.</p>
+    </aside>
+
+    <section class="chat-conversation" aria-label="Conversación con LEXAUDIT">
+
+        <!-- Estados CSS: cada radio activa una vista o conversación predefinida -->
+        <input type="radio" name="chat-state" id="inicio" checked>
+        <input type="radio" name="chat-state" id="menu">
+        <input type="radio" name="chat-state" id="consulta-tarifa">
+        <input type="radio" name="chat-state" id="consulta-incumplimiento">
+        <input type="radio" name="chat-state" id="consulta-mora">
+        <input type="radio" name="chat-state" id="consulta-terminacion">
+        <input type="radio" name="chat-state" id="consulta-penal">
+        <input type="radio" name="chat-state" id="consulta-carga">
+        <input type="radio" name="chat-state" id="consulta-jurisdiccion">
+        <input type="radio" name="chat-state" id="consulta-humana">
+
+        <!-- ESTADO VACÍO / BIENVENIDA -->
+        <div class="empty-state">
+            <div class="empty-logo">
+                <img src="assets/lexaudit-logo.png" alt="Logo de LEXAUDIT">
+            </div>
+
+            <span class="welcome-tag">ASISTENCIA JURÍDICA INTELIGENTE</span>
+            <h2>Bienvenido a LEXAUDIT</h2>
+
+            <p class="empty-description">
+                Tu espacio de orientación jurídica. Explora consultas contractuales,
+                resuelve dudas y encuentra información general sobre legislación colombiana.
+            </p>
+
+            <label for="menu" class="start-chat-button">
+                Iniciar conversación
+                <span aria-hidden="true">→</span>
+            </label>
+
+            <span class="empty-hint">
+                Selecciona una pregunta y comienza a consultar.
+            </span>
+        </div>
+
+        <!-- MENÚ PRINCIPAL -->
+        <div class="conversation-state menu-state">
+            <div class="message bot-message">
+                <div class="message-avatar">LA</div>
+                <div class="message-content">
+                    <span class="message-author">LEXAUDIT</span>
+                    <div class="message-bubble">
+                        <p>¿Qué situación necesitas consultar?</p>
+
+                        <div class="example-question">
+                            <span class="example-label">PREGUNTA DE EJEMPLO</span>
+                            <p>¿Puede el proveedor subir la tarifa un 15 % sin preaviso de 30 días?</p>
+                            <label for="consulta-tarifa" class="text-action">Consultar este caso →</label>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <div class="quick-questions">
+                <span class="quick-title">CONSULTAS FRECUENTES</span>
+
+                <label for="consulta-incumplimiento" class="quick-option">
+                    <span>¿Qué ocurre si incumplo un contrato?</span><span>↗</span>
+                </label>
+                <label for="consulta-mora" class="quick-option">
+                    <span>¿Qué pasa si no me pagan a tiempo?</span><span>↗</span>
+                </label>
+                <label for="consulta-terminacion" class="quick-option">
+                    <span>¿Puedo terminar un contrato antes de tiempo?</span><span>↗</span>
+                </label>
+                <label for="consulta-penal" class="quick-option">
+                    <span>¿Qué es una cláusula penal?</span><span>↗</span>
+                </label>
+                <label for="consulta-carga" class="quick-option featured-option">
+                    <span>Enumera todas las leyes y artículos vigentes de Colombia.</span><span>↗</span>
+                </label>
+                <label for="consulta-jurisdiccion" class="quick-option">
+                    <span>¿Puedes revisar una ley extranjera?</span><span>↗</span>
+                </label>
+                <label for="consulta-humana" class="quick-option human-option">
+                    <span>Hablar con un abogado / asesor</span><span>→</span>
+                </label>
+            </div>
+        </div>
+
+        <!-- RESPUESTA: AUMENTO DE TARIFA -->
+        <div class="conversation-state answer-state tarifa-state">
+            <div class="message user-message">
+                <div class="message-content">
+                    <span class="message-author">Tú</span>
+                    <div class="message-bubble">¿Puede el proveedor subir la tarifa un 15 % sin preaviso de 30 días?</div>
+                </div>
+                <div class="user-avatar">TÚ</div>
+            </div>
+
+            <div class="message bot-message">
+                <div class="message-avatar">LA</div>
+                <div class="message-content">
+                    <span class="message-author">LEXAUDIT</span>
+                    <div class="message-bubble">
+                        <p>No necesariamente. El proveedor debe respetar las condiciones económicas y los mecanismos de modificación establecidos en el contrato.</p>
+                        <p>Si el contrato exige un preaviso de 30 días, modificar la tarifa sin cumplirlo podría constituir un incumplimiento. También debe verificarse si existe una facultad de ajuste y cuáles son sus condiciones.</p>
+                        <div class="legal-reference">
+                            <span class="reference-label">FUENTES JURÍDICAS PARA CONSULTAR</span>
+                            <p><strong>Código Civil — Art. 1602.</strong> Fuerza obligatoria de los contratos legalmente celebrados.</p>
+                            <p><strong>Código de Comercio — Art. 868.</strong> Revisión del contrato ante circunstancias extraordinarias e imprevistas durante su ejecución; no es una regla general sobre aumentos de tarifas.</p>
+                        </div>
+                        <div class="recommendation">
+                            <strong>Recomendación</strong>
+                            <p>Revisa la cláusula de modificación de precios, el mecanismo de notificación y las consecuencias de no aceptar el ajuste.</p>
+                        </div>
+                    </div>
+                    <span class="message-time">LEXAUDIT · Ahora</span>
+                </div>
+            </div>
+            <div class="response-actions">
+                <span>¿Qué deseas hacer?</span>
+                <label for="menu" class="action-option">Otra consulta</label>
+                <label for="consulta-humana" class="action-option primary-action">Hablar con un abogado</label>
+            </div>
+        </div>
+
+        <!-- RESPUESTA: INCUMPLIMIENTO -->
+        <div class="conversation-state answer-state incumplimiento-state">
+            <div class="message user-message">
+                <div class="message-content">
+                    <span class="message-author">Tú</span>
+                    <div class="message-bubble">¿Qué ocurre si incumplo un contrato?</div>
+                </div>
+                <div class="user-avatar">TÚ</div>
+            </div>
+
+            <div class="message bot-message">
+                <div class="message-avatar">LA</div>
+                <div class="message-content">
+                    <span class="message-author">LEXAUDIT</span>
+                    <div class="message-bubble">
+                        <p>Incumplir un contrato puede generar consecuencias jurídicas y económicas. No son automáticas: dependen de la obligación, del tipo de contrato, de lo pactado y de las circunstancias.</p>
+                        <ul class="answer-list">
+                            <li><strong>Exigir el cumplimiento:</strong> la otra parte podría solicitar que se ejecute la obligación acordada.</li>
+                            <li><strong>Resolución o terminación:</strong> puede proceder cuando se cumplen los requisitos legales o contractuales.</li>
+                            <li><strong>Indemnización:</strong> podría reclamarse la reparación de perjuicios si se acreditan sus presupuestos.</li>
+                            <li><strong>Cláusula penal:</strong> si fue pactada, puede producir los efectos previstos en el contrato y la ley.</li>
+                        </ul>
+                        <div class="legal-reference">
+                            <span class="reference-label">FUENTES JURÍDICAS</span>
+                            <p><strong>Código Civil — Art. 1602.</strong> Fuerza obligatoria de los contratos legalmente celebrados.</p>
+                            <p><strong>Código Civil — Art. 1546.</strong> Condición resolutoria tácita en contratos bilaterales.</p>
+                            <p><strong>Código Civil — Arts. 1613 y 1614.</strong> Indemnización de perjuicios y sus componentes.</p>
+                        </div>
+                        <div class="recommendation">
+                            <strong>Recomendación</strong>
+                            <p>Identifica la obligación incumplida, revisa los plazos, las cláusulas aplicables y si existe una justificación legal. No admitas responsabilidad ni firmes acuerdos sin comprender sus efectos.</p>
+                        </div>
+                    </div>
+                    <span class="message-time">LEXAUDIT · Ahora</span>
+                </div>
+            </div>
+            <div class="response-actions">
+                <span>¿Necesitas profundizar?</span>
+                <label for="consulta-penal" class="action-option">Consultar cláusula penal</label>
+                <label for="menu" class="action-option">Volver al menú</label>
+                <label for="consulta-humana" class="action-option primary-action">Hablar con un abogado</label>
+            </div>
+        </div>
+
+        <!-- RESPUESTA: MORA -->
+        <div class="conversation-state answer-state mora-state">
+            <div class="message user-message">
+                <div class="message-content">
+                    <span class="message-author">Tú</span>
+                    <div class="message-bubble">¿Qué pasa si no me pagan a tiempo?</div>
+                </div>
+                <div class="user-avatar">TÚ</div>
+            </div>
+
+            <div class="message bot-message">
+                <div class="message-avatar">LA</div>
+                <div class="message-content">
+                    <span class="message-author">LEXAUDIT</span>
+                    <div class="message-bubble">
+                        <p>Si una obligación de pago no se cumple en el plazo acordado, puede configurarse la mora. El momento en que se produce depende de la obligación y de las reglas legales aplicables.</p>
+                        <p>Entre las consecuencias posibles están los intereses moratorios, la reclamación judicial del pago y otras consecuencias previstas en el contrato.</p>
+                        <div class="legal-reference">
+                            <span class="reference-label">FUENTES JURÍDICAS</span>
+                            <p><strong>Código Civil — Art. 1608.</strong> Supuestos en los que el deudor está en mora.</p>
+                            <p><strong>Código de Comercio — Art. 884.</strong> Reglas sobre intereses en obligaciones mercantiles, según el supuesto aplicable.</p>
+                        </div>
+                        <div class="recommendation">
+                            <strong>Recomendación</strong>
+                            <p>Conserva facturas, comprobantes y comunicaciones. Verifica la fecha de vencimiento, si era necesario requerir al deudor y qué tasa de interés puede aplicarse legalmente.</p>
+                        </div>
+                    </div>
+                    <span class="message-time">LEXAUDIT · Ahora</span>
+                </div>
+            </div>
+            <div class="response-actions">
+                <label for="menu" class="action-option">Otra consulta</label>
+                <label for="consulta-humana" class="action-option primary-action">Hablar con un abogado</label>
+            </div>
+        </div>
+
+        <!-- RESPUESTA: TERMINACIÓN -->
+        <div class="conversation-state answer-state terminacion-state">
+            <div class="message user-message">
+                <div class="message-content">
+                    <span class="message-author">Tú</span>
+                    <div class="message-bubble">¿Puedo terminar un contrato antes de tiempo?</div>
+                </div>
+                <div class="user-avatar">TÚ</div>
+            </div>
+
+            <div class="message bot-message">
+                <div class="message-avatar">LA</div>
+                <div class="message-content">
+                    <span class="message-author">LEXAUDIT</span>
+                    <div class="message-bubble">
+                        <p>Puede ser posible, pero depende del tipo de contrato, sus cláusulas y la causa de terminación. No todos los contratos permiten retirarse anticipadamente sin consecuencias.</p>
+                        <ul class="answer-list">
+                            <li>Acuerdo de terminación entre las partes.</li>
+                            <li>Vencimiento del plazo o cumplimiento de una condición pactada.</li>
+                            <li>Incumplimiento de la otra parte, cuando proceda legalmente.</li>
+                            <li>Ejercicio de una facultad de terminación unilateral cuando esté permitida por la ley o el contrato.</li>
+                        </ul>
+                        <div class="legal-reference">
+                            <span class="reference-label">FUENTES JURÍDICAS</span>
+                            <p><strong>Código Civil — Art. 1602.</strong> Fuerza obligatoria del contrato.</p>
+                            <p><strong>Código Civil — Art. 1546.</strong> Resolución por incumplimiento en contratos bilaterales.</p>
+                        </div>
+                        <div class="recommendation">
+                            <strong>Recomendación</strong>
+                            <p>Antes de terminarlo, revisa el preaviso, las causales, las penalidades y las obligaciones pendientes. La respuesta puede cambiar según el tipo de contrato.</p>
+                        </div>
+                    </div>
+                    <span class="message-time">LEXAUDIT · Ahora</span>
+                </div>
+            </div>
+            <div class="response-actions">
+                <label for="consulta-penal" class="action-option">Consultar penalidades</label>
+                <label for="menu" class="action-option">Volver al menú</label>
+                <label for="consulta-humana" class="action-option primary-action">Hablar con un abogado</label>
+            </div>
+        </div>
+
+        <!-- RESPUESTA: CLÁUSULA PENAL -->
+        <div class="conversation-state answer-state penal-state">
+            <div class="message user-message">
+                <div class="message-content">
+                    <span class="message-author">Tú</span>
+                    <div class="message-bubble">¿Qué es una cláusula penal?</div>
+                </div>
+                <div class="user-avatar">TÚ</div>
+            </div>
+
+            <div class="message bot-message">
+                <div class="message-avatar">LA</div>
+                <div class="message-content">
+                    <span class="message-author">LEXAUDIT</span>
+                    <div class="message-bubble">
+                        <p>Es un acuerdo por el cual una persona se sujeta a una prestación o pena si no ejecuta una obligación o la retarda, en los términos pactados.</p>
+                        <p>Por ejemplo, un contrato puede establecer una suma que deberá pagarse si una parte incumple una obligación determinada.</p>
+                        <p>Su exigibilidad y la posibilidad de acumularla con el cumplimiento o con perjuicios dependen de las reglas legales y de cómo esté redactada la cláusula.</p>
+                        <div class="legal-reference">
+                            <span class="reference-label">FUENTES JURÍDICAS</span>
+                            <p><strong>Código Civil — Art. 1592.</strong> Concepto legal de cláusula penal.</p>
+                            <p><strong>Código Civil — Arts. 1594 y siguientes.</strong> Reglas sobre exigibilidad y efectos de la cláusula penal.</p>
+                        </div>
+                        <div class="recommendation">
+                            <strong>Recomendación</strong>
+                            <p>Revisa qué incumplimiento activa la cláusula, cómo se calcula la pena y si se pactó expresamente la posibilidad de reclamar otros perjuicios.</p>
+                        </div>
+                    </div>
+                    <span class="message-time">LEXAUDIT · Ahora</span>
+                </div>
+            </div>
+            <div class="response-actions">
+                <label for="consulta-incumplimiento" class="action-option">Ver incumplimiento contractual</label>
+                <label for="menu" class="action-option">Volver al menú</label>
+                <label for="consulta-humana" class="action-option primary-action">Hablar con un abogado</label>
+            </div>
+        </div>
+
+        <!-- ESTADO DE CARGA: PREGUNTA AMPLIA -->
+        <div class="conversation-state answer-state carga-state">
+            <div class="message user-message">
+                <div class="message-content">
+                    <span class="message-author">Tú</span>
+                    <div class="message-bubble">Enumera todas las leyes y todos los artículos vigentes de Colombia, con una explicación de cada uno.</div>
+                </div>
+                <div class="user-avatar">TÚ</div>
+            </div>
+
+            <!-- El indicador se muestra durante el primer tramo de la animación -->
+            <div class="loading-status">
+                <span class="loading-dots" aria-hidden="true"><i></i><i></i><i></i></span>
+                <span>LEXAUDIT está analizando el alcance de tu solicitud...</span>
+            </div>
+
+            <!-- La respuesta aparece después de la simulación de carga -->
+            <div class="delayed-answer">
+                <div class="message bot-message">
+                    <div class="message-avatar">LA</div>
+                    <div class="message-content">
+                        <span class="message-author">LEXAUDIT</span>
+                        <div class="message-bubble">
+                            <p>Tu solicitud abarca un volumen normativo demasiado amplio para responderlo de forma completa y fiable en un solo mensaje.</p>
+                            <p>En Colombia existen leyes, códigos, decretos, resoluciones y otras disposiciones. Además, las normas pueden ser modificadas, derogadas, compiladas o declaradas inexequibles. Por eso, no sería correcto presentar una lista como si fuera un inventario completo y actualizado sin delimitar la búsqueda y verificar fuentes oficiales.</p>
+                            <div class="recommendation">
+                                <strong>Podemos acotar la consulta</strong>
+                                <p>Elige un área para comenzar: derecho laboral, civil, comercial, penal, constitucional o contratación estatal.</p>
+                            </div>
+                            <div class="legal-reference">
+                                <span class="reference-label">FUENTES OFICIALES PARA VERIFICACIÓN</span>
+                                <p><strong>SUIN-Juriscol:</strong> Sistema Único de Información Normativa del Estado colombiano.</p>
+                                <p><strong>Diario Oficial:</strong> publicación oficial de normas nacionales.</p>
+                            </div>
+                            <p>No puedo garantizar un inventario exhaustivo de toda la legislación colombiana desde este prototipo, pero sí orientar consultas delimitadas.</p>
+                        </div>
+                        <span class="message-time">LEXAUDIT · Ahora</span>
+                    </div>
+                </div>
+
+                <div class="response-actions">
+                    <span>¿Cómo deseas continuar?</span>
+                    <label for="consulta-incumplimiento" class="action-option">Derecho contractual</label>
+                    <label for="menu" class="action-option">Volver al menú</label>
+                    <label for="consulta-humana" class="action-option primary-action">Hablar con un abogado</label>
+                </div>
+            </div>
+        </div>
+
+        <!-- ERROR HONESTO: JURISDICCIÓN EXTRANJERA -->
+        <div class="conversation-state answer-state jurisdiccion-state">
+            <div class="message user-message">
+                <div class="message-content">
+                    <span class="message-author">Tú</span>
+                    <div class="message-bubble">¿Puedes revisar una ley extranjera?</div>
+                </div>
+                <div class="user-avatar">TÚ</div>
+            </div>
+
+            <div class="message bot-message">
+                <div class="message-avatar">LA</div>
+                <div class="message-content">
+                    <span class="message-author">LEXAUDIT</span>
+                    <div class="message-bubble error-bubble">
+                        <div class="error-heading"><span>!</span><strong>No puedo validar esta consulta</strong></div>
+                        <p>Esta consulta corresponde a una jurisdicción extranjera que está fuera del alcance de validación de este prototipo.</p>
+                        <p>No sería responsable ofrecer una interpretación como si hubiera verificado la legislación aplicable.</p>
+                        <div class="recommendation">
+                            <strong>¿Cómo podemos continuar?</strong>
+                            <p>Puedes realizar una consulta relacionada con legislación colombiana o solicitar una revisión profesional.</p>
+                        </div>
+                    </div>
+                    <span class="message-time">LEXAUDIT · Ahora</span>
+                </div>
+            </div>
+
+            <div class="response-actions">
+                <label for="menu" class="action-option">Volver a preguntas</label>
+                <label for="consulta-humana" class="action-option primary-action">Solicitar revisión humana</label>
+            </div>
+        </div>
+
+        <!-- DERIVACIÓN A PERSONA -->
+        <div class="conversation-state answer-state humana-state">
+            <div class="message user-message">
+                <div class="message-content">
+                    <span class="message-author">Tú</span>
+                    <div class="message-bubble">Quiero hablar con un abogado.</div>
+                </div>
+                <div class="user-avatar">TÚ</div>
+            </div>
+
+            <div class="message bot-message">
+                <div class="message-avatar">LA</div>
+                <div class="message-content">
+                    <span class="message-author">LEXAUDIT</span>
+                    <div class="message-bubble">
+                        <div class="human-confirmation"><span class="confirmation-icon">✓</span><strong>Atención humana</strong></div>
+                        <p>Una consulta que requiere revisión personalizada debe ser atendida por un profesional.</p>
+                        <p>Puedes utilizar el siguiente canal de contacto:</p>
+                        <div class="contact-card">
+                            <span class="contact-label">EQUIPO JURÍDICO</span>
+                            <p><strong>Correo electrónico</strong></p>
+                            <a href="mailto:asesoria@lexaudit.com">asesoria@lexaudit.com</a>
+                            <p class="contact-note">Explica tu situación y adjunta los documentos relacionados con tu consulta.</p>
+                        </div>
+                        <span class="answer-disclaimer">Demostración de derivación. Este prototipo no envía solicitudes reales ni confirma disponibilidad de un abogado. Sustituye el correo por un contacto real antes de presentarlo como servicio.</span>
+                    </div>
+                    <span class="message-time">LEXAUDIT · Ahora</span>
+                </div>
+            </div>
+
+            <div class="response-actions">
+                <label for="menu" class="action-option">Volver al chat</label>
+            </div>
+        </div>
+
+    </section>
+
+    <!-- Entrada deshabilitada: el prototipo no procesa texto libre -->
+    <footer class="chat-footer">
+        <form class="chat-input-container">
+            <input type="text" placeholder="Escribe tu consulta jurídica..." aria-label="Escribe tu consulta jurídica" disabled>
+            <button type="button" disabled aria-label="Enviar mensaje">↑</button>
+        </form>
+        <p class="input-caption">Prototipo interactivo · Selecciona una pregunta para continuar.</p>
+    </footer>
+
+</main>
+</body>
+</html>

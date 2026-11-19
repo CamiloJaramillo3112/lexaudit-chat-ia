@@ -1,0 +1,873 @@
+/* ==========================================================
+   LEXAUDIT — CHATBOT JURÍDICO
+   Prototipo interactivo HTML + CSS, sin JavaScript.
+========================================================== */
+
+/* 1. Variables */
+:root {
+    --navy: #09162e;
+    --navy-light: #1b3452;
+    --gold: #c6a04e;
+    --background: #f2f4f7;
+    --surface: #ffffff;
+    --surface-soft: #f5f7fa;
+    --text: #263648;
+    --text-secondary: #788596;
+    --text-muted: #a0aab7;
+    --border: #e5e9ef;
+    --success: #31966c;
+    --danger: #bd655d;
+    --radius: 15px;
+    --font-primary: "DM Sans", sans-serif;
+    --font-heading: "Manrope", sans-serif;
+    --shadow: 0 12px 45px rgba(9, 22, 46, 0.08);
+}
+
+/* 2. Reset y base */
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+body {
+    min-height: 100vh;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    padding: 24px 16px;
+    background: var(--background);
+    color: var(--text);
+    font-family: var(--font-primary);
+}
+
+/* 3. Estructura principal */
+.app-container {
+    width: 100%;
+    max-width: 790px;
+    height: min(900px, calc(100vh - 48px));
+    min-height: 620px;
+    display: flex;
+    flex-direction: column;
+    overflow: hidden;
+    background: var(--surface);
+    border: 1px solid var(--border);
+    border-radius: 18px;
+    box-shadow: var(--shadow);
+}
+
+/* 4. Cabecera */
+.chat-header {
+    min-height: 88px;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    gap: 12px;
+    padding: 12px 22px;
+    background: var(--navy);
+    color: white;
+}
+
+.bot-identity {
+    display: flex;
+    align-items: center;
+    gap: 12px;
+}
+
+.brand-logo {
+    width: 64px;
+    height: 64px;
+    flex-shrink: 0;
+    object-fit: contain;
+    border-radius: 10px;
+}
+
+.bot-information h1 {
+    font-family: var(--font-heading);
+    font-size: 17px;
+    font-weight: 800;
+    letter-spacing: 1.5px;
+}
+
+.bot-information p {
+    margin-top: 4px;
+    font-size: 11px;
+    color: #b5c2d2;
+}
+
+.header-status {
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    font-size: 11px;
+    color: #d0dbe5;
+}
+
+.status-dot {
+    width: 8px;
+    height: 8px;
+    border-radius: 50%;
+    background: #54c795;
+}
+
+/* 5. Aviso legal persistente */
+.legal-notice {
+    min-height: 48px;
+    display: flex;
+    align-items: center;
+    gap: 11px;
+    padding: 10px 22px;
+    background: #fffaf0;
+    border-bottom: 1px solid #f0e5d1;
+}
+
+.notice-icon {
+    flex-shrink: 0;
+    color: #a17b3f;
+    font-size: 18px;
+}
+
+.legal-notice p {
+    color: #786444;
+    font-size: 10px;
+    line-height: 1.6;
+}
+
+/* 6. Área de conversación */
+.chat-conversation {
+    flex: 1;
+    display: flex;
+    flex-direction: column;
+    gap: 22px;
+    padding: 24px;
+    overflow-y: auto;
+    scroll-behavior: smooth;
+}
+
+.chat-conversation::-webkit-scrollbar {
+    width: 5px;
+}
+
+.chat-conversation::-webkit-scrollbar-thumb {
+    background: #dce2e9;
+    border-radius: 10px;
+}
+
+/* 7. Mensajes */
+.message {
+    width: 100%;
+    display: flex;
+    align-items: flex-start;
+    gap: 11px;
+    animation: message-appear 0.3s ease both;
+}
+
+.message-avatar,
+.user-avatar {
+    width: 34px;
+    height: 34px;
+    flex-shrink: 0;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    border-radius: 10px;
+    font-size: 10px;
+    font-weight: 800;
+}
+
+.message-avatar {
+    background: var(--navy);
+    color: var(--gold);
+}
+
+.user-avatar {
+    background: #e9edf2;
+    color: #526174;
+}
+
+.message-content {
+    max-width: 87%;
+    display: flex;
+    flex-direction: column;
+    align-items: flex-start;
+    gap: 6px;
+}
+
+.message-author {
+    color: var(--text-secondary);
+    font-size: 11px;
+    font-weight: 700;
+}
+
+.message-bubble {
+    padding: 15px 17px;
+    background: var(--surface-soft);
+    border: 1px solid #edf0f4;
+    border-radius: 3px var(--radius) var(--radius) var(--radius);
+    color: var(--text);
+    font-size: 12px;
+    line-height: 1.75;
+}
+
+.message-bubble p + p {
+    margin-top: 10px;
+}
+
+.message-time {
+    color: var(--text-muted);
+    font-size: 10px;
+}
+
+/* 8. Mensajes del usuario */
+.user-message {
+    justify-content: flex-end;
+}
+
+.user-message .message-content {
+    align-items: flex-end;
+}
+
+.user-message .message-bubble {
+    color: white;
+    background: var(--navy-light);
+    border: 0;
+    border-radius: var(--radius) 3px var(--radius) var(--radius);
+}
+
+/* 9. Pregunta de ejemplo */
+.example-question {
+    margin-top: 15px;
+    padding: 15px;
+    background: white;
+    border: 1px solid var(--border);
+    border-left: 3px solid var(--gold);
+    border-radius: 9px;
+}
+
+.example-label,
+.quick-title {
+    display: block;
+    margin-bottom: 9px;
+    color: #a17b3f;
+    font-size: 9px;
+    font-weight: 800;
+    letter-spacing: 1px;
+}
+
+.example-question p {
+    font-weight: 600;
+    line-height: 1.6;
+}
+
+.text-action {
+    display: inline-block;
+    margin-top: 12px;
+    color: #a17b3f;
+    font-size: 11px;
+    font-weight: 700;
+    cursor: pointer;
+}
+
+.text-action:hover {
+    color: var(--navy);
+    text-decoration: underline;
+}
+
+/* 10. Preguntas rápidas */
+.quick-questions {
+    display: flex;
+    flex-direction: column;
+    gap: 8px;
+    padding-left: 45px;
+}
+
+.quick-option {
+    min-height: 43px;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    gap: 12px;
+    padding: 11px 14px;
+    background: white;
+    border: 1px solid var(--border);
+    border-radius: 9px;
+    color: var(--text);
+    font-size: 11px;
+    font-weight: 500;
+    cursor: pointer;
+    transition: background 0.2s ease, border-color 0.2s ease, transform 0.2s ease;
+}
+
+.quick-option > span:last-child {
+    flex-shrink: 0;
+    color: var(--gold);
+}
+
+.quick-option:hover {
+    background: #faf9f6;
+    border-color: var(--gold);
+    transform: translateX(3px);
+}
+
+.featured-option {
+    background: #f8f6f0;
+    border-color: #e8ddc7;
+}
+
+.human-option {
+    margin-top: 4px;
+    background: #f3f5f8;
+    font-weight: 700;
+    color: var(--navy);
+}
+
+/* 11. Listas de respuestas */
+.answer-list {
+    margin: 12px 0 12px 18px;
+}
+
+.answer-list li {
+    margin-bottom: 9px;
+    padding-left: 3px;
+    line-height: 1.7;
+}
+
+.answer-list li::marker {
+    color: var(--gold);
+}
+
+/* 12. Fuentes jurídicas */
+.legal-reference {
+    margin: 15px 0;
+    padding: 14px;
+    background: white;
+    border: 1px solid var(--border);
+    border-left: 3px solid var(--gold);
+    border-radius: 9px;
+}
+
+.reference-label {
+    display: block;
+    margin-bottom: 11px;
+    color: #a17b3f;
+    font-size: 9px;
+    font-weight: 800;
+    letter-spacing: 1px;
+}
+
+.legal-reference p {
+    font-size: 11px;
+    line-height: 1.65;
+}
+
+.legal-reference p + p {
+    margin-top: 5px;
+}
+
+/* 13. Recomendaciones */
+.recommendation {
+    margin-top: 14px;
+    padding: 13px 14px;
+    background: #f0f5f2;
+    border: 1px solid #dceae1;
+    border-radius: 8px;
+}
+
+.recommendation strong {
+    display: block;
+    margin-bottom: 5px;
+    color: #347555;
+    font-size: 11px;
+}
+
+.recommendation p {
+    font-size: 11px;
+    line-height: 1.7;
+}
+
+/* 14. Acciones posteriores */
+.response-actions {
+    display: flex;
+    flex-wrap: wrap;
+    align-items: center;
+    gap: 8px;
+    padding-left: 45px;
+}
+
+.response-actions > span {
+    width: 100%;
+    color: var(--text-secondary);
+    font-size: 10px;
+}
+
+.action-option {
+    display: inline-block;
+    padding: 9px 13px;
+    background: white;
+    border: 1px solid var(--border);
+    border-radius: 8px;
+    color: var(--navy);
+    font-size: 10px;
+    font-weight: 600;
+    cursor: pointer;
+    transition: background 0.2s ease, border-color 0.2s ease;
+}
+
+.action-option:hover {
+    background: #faf9f6;
+    border-color: var(--gold);
+}
+
+.primary-action {
+    background: var(--navy);
+    border-color: var(--navy);
+    color: white;
+}
+
+.primary-action:hover {
+    background: var(--navy-light);
+    color: white;
+}
+
+/* 15. Error honesto */
+.error-bubble {
+    background: #fffafa;
+    border-color: #f0deda;
+}
+
+.error-heading {
+    display: flex;
+    align-items: center;
+    gap: 9px;
+    margin-bottom: 12px;
+    color: #a84f49;
+    font-size: 11px;
+}
+
+.error-heading span {
+    width: 22px;
+    height: 22px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    background: #f8e9e6;
+    border-radius: 50%;
+    font-weight: 800;
+}
+
+/* 16. Atención humana */
+.human-confirmation {
+    display: flex;
+    align-items: center;
+    gap: 9px;
+    margin-bottom: 12px;
+    color: var(--success);
+    font-size: 12px;
+}
+
+.confirmation-icon {
+    width: 24px;
+    height: 24px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    background: #e7f5ee;
+    border-radius: 50%;
+}
+
+.contact-card {
+    margin-top: 14px;
+    padding: 14px;
+    background: white;
+    border: 1px solid var(--border);
+    border-radius: 9px;
+}
+
+.contact-label {
+    display: block;
+    margin-bottom: 10px;
+    color: #a17b3f;
+    font-size: 9px;
+    font-weight: 800;
+    letter-spacing: 1px;
+}
+
+.contact-card p {
+    font-size: 11px;
+}
+
+.contact-card a {
+    display: inline-block;
+    margin-top: 5px;
+    color: var(--navy);
+    font-size: 12px;
+    font-weight: 700;
+    text-decoration: none;
+}
+
+.contact-card a:hover {
+    text-decoration: underline;
+}
+
+.contact-note {
+    margin-top: 12px;
+    color: var(--text-secondary);
+}
+
+.answer-disclaimer {
+    display: block;
+    margin-top: 13px;
+    padding-top: 10px;
+    border-top: 1px solid var(--border);
+    color: var(--text-muted);
+    font-size: 10px;
+    line-height: 1.6;
+}
+
+/* 17. Estados de conversación */
+input[name="chat-state"] {
+    position: absolute;
+    width: 1px;
+    height: 1px;
+    opacity: 0;
+    pointer-events: none;
+}
+
+.conversation-state {
+    display: none;
+}
+
+#menu:checked ~ .menu-state,
+#consulta-tarifa:checked ~ .tarifa-state,
+#consulta-incumplimiento:checked ~ .incumplimiento-state,
+#consulta-mora:checked ~ .mora-state,
+#consulta-terminacion:checked ~ .terminacion-state,
+#consulta-penal:checked ~ .penal-state,
+#consulta-carga:checked ~ .carga-state,
+#consulta-jurisdiccion:checked ~ .jurisdiccion-state,
+#consulta-humana:checked ~ .humana-state {
+    display: flex;
+    flex-direction: column;
+    gap: 20px;
+    animation: message-appear 0.3s ease both;
+}
+
+@keyframes message-appear {
+    from {
+        opacity: 0;
+        transform: translateY(8px);
+    }
+    to {
+        opacity: 1;
+        transform: translateY(0);
+    }
+}
+
+/* 18. Simulación visual de carga para la consulta extensa.
+   CSS no analiza la pregunta: muestra el indicador 2.8 s
+   y luego revela la respuesta predefinida. */
+.loading-status {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    margin-left: 45px;
+    color: #929eac;
+    font-size: 10px;
+    animation: hide-loading 0.1s linear 2.8s forwards;
+}
+
+.loading-dots {
+    display: inline-flex;
+    align-items: center;
+    gap: 4px;
+}
+
+.loading-dots i {
+    width: 5px;
+    height: 5px;
+    display: block;
+    background: #aab5c2;
+    border-radius: 50%;
+    animation: dot-pulse 1s ease-in-out infinite;
+}
+
+.loading-dots i:nth-child(2) {
+    animation-delay: 0.15s;
+}
+
+.loading-dots i:nth-child(3) {
+    animation-delay: 0.3s;
+}
+
+@keyframes dot-pulse {
+    0%, 60%, 100% {
+        opacity: 0.35;
+        transform: translateY(0);
+    }
+    30% {
+        opacity: 1;
+        transform: translateY(-3px);
+    }
+}
+
+@keyframes hide-loading {
+    to {
+        visibility: hidden;
+        opacity: 0;
+    }
+}
+
+.delayed-answer {
+    visibility: hidden;
+    opacity: 0;
+    animation: reveal-answer 0.25s ease 2.8s forwards;
+}
+
+@keyframes reveal-answer {
+    to {
+        visibility: visible;
+        opacity: 1;
+    }
+}
+
+/* 19. Pie del chat */
+.chat-footer {
+    padding: 15px 22px 12px;
+    background: white;
+    border-top: 1px solid var(--border);
+}
+
+.chat-input-container {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    padding: 6px 7px 6px 14px;
+    background: #f7f8fa;
+    border: 1px solid var(--border);
+    border-radius: 10px;
+    transition: border-color 0.2s ease;
+}
+
+.chat-input-container:focus-within {
+    border-color: var(--gold);
+}
+
+.chat-input-container input {
+    width: 100%;
+    padding: 10px 0;
+    background: transparent;
+    border: 0;
+    outline: 0;
+    font-family: var(--font-primary);
+    font-size: 11px;
+}
+
+.chat-input-container input::placeholder {
+    color: var(--text-muted);
+}
+
+.chat-input-container input:disabled {
+    cursor: not-allowed;
+}
+
+.chat-input-container button {
+    width: 35px;
+    height: 35px;
+    flex-shrink: 0;
+    border: 0;
+    border-radius: 8px;
+    background: var(--navy);
+    color: white;
+    font-size: 18px;
+    opacity: 0.4;
+}
+
+.chat-input-container button:disabled {
+    cursor: not-allowed;
+}
+
+.input-caption {
+    margin-top: 9px;
+    color: var(--text-muted);
+    text-align: center;
+    font-size: 9px;
+}
+
+/* 20. Accesibilidad */
+label:focus-visible,
+a:focus-visible,
+button:focus-visible {
+    outline: 3px solid var(--gold);
+    outline-offset: 4px;
+}
+
+.quick-option:active,
+.action-option:active {
+    transform: scale(0.98);
+}
+
+/* 21. Responsive */
+@media (max-width: 600px) {
+    body {
+        padding: 0;
+    }
+
+    .app-container {
+        width: 100%;
+        height: 100vh;
+        height: 100dvh;
+        min-height: 0;
+        border: 0;
+        border-radius: 0;
+    }
+
+    .chat-header {
+        min-height: 78px;
+        padding: 10px 15px;
+    }
+
+    .brand-logo {
+        width: 56px;
+        height: 56px;
+    }
+
+    .bot-information h1 {
+        font-size: 15px;
+    }
+
+    .bot-information p {
+        font-size: 10px;
+    }
+
+    .header-status {
+        font-size: 9px;
+    }
+
+    .legal-notice {
+        padding: 10px 15px;
+    }
+
+    .chat-conversation {
+        padding: 19px 14px;
+        gap: 19px;
+    }
+
+    .message-content {
+        max-width: 88%;
+    }
+
+    .quick-questions,
+    .response-actions,
+    .loading-status {
+        margin-left: 0;
+        padding-left: 43px;
+    }
+
+    .chat-footer {
+        padding: 12px 14px;
+    }
+}
+
+@media (prefers-reduced-motion: reduce) {
+    *,
+    *::before,
+    *::after {
+        animation-duration: 0.01ms !important;
+        transition-duration: 0.01ms !important;
+        scroll-behavior: auto !important;
+    }
+}
+
+/* ==========================================================
+   ESTADO VACÍO — BIENVENIDA
+========================================================== */
+
+#inicio:checked ~ .empty-state {
+    display: flex;
+}
+
+.empty-state {
+    display: none;
+    flex: 1;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    padding: 35px 20px;
+    text-align: center;
+    animation: message-appear 0.4s ease both;
+}
+
+.empty-logo {
+    width: 105px;
+    height: 105px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    margin-bottom: 24px;
+    overflow: hidden;
+    border-radius: 22px;
+    background: var(--navy);
+}
+
+.empty-logo img {
+    width: 100%;
+    height: 100%;
+    object-fit: contain;
+}
+
+.welcome-tag {
+    margin-bottom: 13px;
+    color: #a17b3f;
+    font-size: 9px;
+    font-weight: 800;
+    letter-spacing: 1.8px;
+}
+
+.empty-state h2 {
+    color: var(--navy);
+    font-family: var(--font-heading);
+    font-size: 25px;
+    font-weight: 800;
+}
+
+.empty-description {
+    max-width: 390px;
+    margin-top: 13px;
+    color: var(--text-secondary);
+    font-size: 12px;
+    line-height: 1.9;
+}
+
+.start-chat-button {
+    min-width: 205px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    gap: 18px;
+    margin-top: 27px;
+    padding: 14px 20px;
+    background: var(--navy);
+    border: 1px solid var(--navy);
+    border-radius: 9px;
+    color: white;
+    font-size: 12px;
+    font-weight: 700;
+    cursor: pointer;
+    transition: background 0.2s ease, transform 0.2s ease;
+}
+
+.start-chat-button:hover {
+    background: var(--navy-light);
+    transform: translateY(-2px);
+}
+
+.start-chat-button span {
+    color: var(--gold);
+    font-size: 17px;
+}
+
+.empty-hint {
+    margin-top: 16px;
+    color: var(--text-muted);
+    font-size: 10px;
+}

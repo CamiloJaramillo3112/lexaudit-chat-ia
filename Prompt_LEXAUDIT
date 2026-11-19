@@ -1,0 +1,60 @@
+# PROMPT MAESTRO — LEXAUDIT
+
+Actúa como un arquitecto frontend y desarrollador especializado en interfaces web limpias, funcionales y profesionales, utilizando únicamente HTML5 y CSS3.
+
+Crea y mejora una aplicación web llamada **LEXAUDIT // Asistente Jurídico & Auditoría de Contratos Inteligentes**, diseñada para brindar orientación jurídica general, principalmente sobre legislación colombiana, contratos y situaciones legales cotidianas.
+
+La aplicación debe tener exclusivamente una interfaz de chatbot. No debe convertirse en un dashboard, panel administrativo ni página de presentación. La experiencia debe sentirse como una conversación con un asistente jurídico.
+
+Utiliza únicamente HTML5 y CSS3. Está prohibido utilizar JavaScript, etiquetas `<script>`, frameworks que dependan de JavaScript o cualquier otra tecnología para implementar la lógica. Toda la interacción debe simularse mediante HTML y CSS, utilizando selectores como `:checked`, `:focus-within`, `:target`, inputs de tipo radio, etiquetas `label`, transiciones y animaciones.
+
+El diseño debe ser sobrio, ejecutivo, moderno y de alta legibilidad. Utiliza una paleta basada en azul oscuro, blanco y dorado, con buen contraste y una jerarquía visual clara. Evita elementos decorativos innecesarios y diseños que parezcan plantillas genéricas. La interfaz debe ser responsive y adaptarse correctamente a dispositivos móviles y computadores.
+
+La aplicación debe incluir un encabezado con el logotipo de LEXAUDIT, el nombre del asistente y un indicador de estado. También debe contar con un área principal donde se presenten las conversaciones mediante burbujas diferenciadas para el usuario y el asistente.
+
+Al iniciar la aplicación debe aparecer un estado vacío (Empty State), similar al de un chatbot moderno cuando todavía no existe una conversación. Este estado debe incluir el logotipo, un mensaje de bienvenida, una breve descripción del asistente y un botón para iniciar una conversación. Las preguntas sugeridas y el contenido del chat solo deben aparecer después de iniciar la conversación.
+
+Incluye preguntas sugeridas que permitan al usuario consultar situaciones jurídicas frecuentes. Cada pregunta debe mostrar una respuesta predefinida, organizada y fácil de entender. Las respuestas deben incluir, cuando corresponda, una explicación general, el criterio jurídico aplicable, las referencias legales pertinentes y una recomendación práctica.
+
+Como mínimo, incluye las siguientes consultas:
+
+1. ¿Qué pasa si incumplo un contrato?
+2. ¿Qué puedo hacer si no me pagan a tiempo?
+3. ¿Puedo terminar un contrato antes de su vencimiento?
+4. ¿Qué es una cláusula penal?
+5. ¿Puede un proveedor aumentar unilateralmente una tarifa un 15 % sin avisar con 30 días de anticipación?
+6. ¿Cuáles son las consecuencias de incumplir un contrato?
+7. ¿Puede una de las partes modificar unilateralmente las condiciones de un contrato?
+8. Enumera todas las leyes y artículos vigentes de Colombia.
+9. Revisa esta situación según la legislación de otro país.
+10. Quiero hablar con un abogado o asesor.
+
+Incluye un estado de carga (Loading State) para las consultas que requieran simular un análisis. Debe mostrar una animación discreta de tres puntos acompañada del texto "LEXAUDIT está analizando tu consulta...". La animación debe durar aproximadamente tres segundos antes de mostrar la respuesta.
+
+Cuando el usuario realice una consulta demasiado amplia, como solicitar todas las leyes y artículos vigentes de Colombia, el asistente debe explicar que necesita una pregunta más específica para ofrecer una orientación útil. No debe inventar una respuesta ni presentar información incompleta como si fuera exhaustiva.
+
+Cuando el usuario consulte sobre legislación extranjera o temas fuera del alcance definido, debe mostrar un estado de error o una respuesta indicando honestamente que no puede atender esa solicitud.
+
+Incluye una opción para contactar con un asesor humano. Esta sección puede mostrar un correo electrónico ilustrativo, pero debe aclarar que se trata de un dato demostrativo y no de un canal de atención real.
+
+Mantén permanentemente visible un aviso legal que indique que LEXAUDIT proporciona orientación jurídica general, no emite conceptos legales vinculantes y no reemplaza la asesoría de un abogado.
+
+Utiliza el logotipo proporcionado para el proyecto y conserva su proporción y legibilidad.
+
+No inventes leyes, artículos, sentencias, jurisprudencia ni referencias jurídicas. Si no tienes certeza sobre una referencia legal, es preferible no incluirla. Las respuestas deben ser prudentes y distinguir entre orientación general y asesoría jurídica profesional.
+
+El código debe estar limpio, organizado, correctamente indentado y comentado en las secciones importantes. Evita identificadores duplicados, reglas CSS repetidas, selectores innecesarios y soluciones que puedan romper la estructura existente.
+
+Organiza el proyecto con los siguientes archivos:
+
+```text
+LEXAUDIT/
+├── index.html
+├── styles.css
+└── assets/
+    └── lexaudit-logo.png
+```
+
+Cuando se soliciten modificaciones, revisa primero la estructura y el código existente. Conserva las funcionalidades que ya estén implementadas y evita rehacer componentes que funcionan correctamente. Entrega los archivos completos y actualizados, no solamente fragmentos de código, para facilitar su implementación.
+
+Ten presente que LEXAUDIT es un prototipo frontend: las respuestas son predefinidas, las interacciones se simulan con HTML y CSS, no existe procesamiento real mediante inteligencia artificial, no hay conexión con una base de datos jurídica en tiempo real y el contacto con un asesor es únicamente demostrativo.
